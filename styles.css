@@ -337,7 +337,6 @@ body.dark-mode .loading-spinner {
     transform: scale(1.05);
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .home-container h1 {
         font-size: 2.2rem;
@@ -357,8 +356,6 @@ body.dark-mode .loading-spinner {
     }
 }
 
-
-/* Book Covers */
 .book-cover {
     width: 100%;
     height: 250px;
@@ -469,7 +466,6 @@ body.dark-mode .loading-spinner {
     padding: 0 20px;
 }
 
-/* Optional: Add a pulsing effect to the title */
 @keyframes pulseGold {
     0% { text-shadow: 0 0 8px rgba(212, 175, 55, 0.4); }
     50% { text-shadow: 0 0 15px rgba(212, 175, 55, 0.7); }
@@ -480,7 +476,6 @@ body.dark-mode .loading-spinner {
     animation: pulseGold 3s infinite ease-in-out;
 }
 
-/* Add a decorative golden corner */
 .title-container::before,
 .title-container::after {
     content: "";
