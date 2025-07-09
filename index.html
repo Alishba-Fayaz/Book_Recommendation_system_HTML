@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="loading" class="loading-spinner" style="display:none;">
+        <div class="spinner"></div>
+        <p>Loading your literary adventure...</p>
+    </div>
+
+    <button id="darkModeToggle">🌙 Dark Mode</button>
+
+    <div class="home-container">
+         <div class="title-container">
+        <div class="gold-line left-line"></div>
+        <h1 class="animate__animated animate__fadeIn">Welcome to The Book Guide</h1>
+        
+        <div class="gold-line right-line"></div>
+    </div>
+        <div class="option-cards">
+            <div class="option-card" id="exploreBooks">
+                <h2>📚 Explore Books</h2>
+                <p>Find your perfect read with our book Guide</p>
+            </div>
+            
+            <div class="option-card" id="wordOfTheDay">
+                <h2>🧠 Word of the Day</h2>
+                <p>Expand your vocabulary daily</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Explore Books Section -->
+    <div class="explore-section" style="display:none;">
+        <button class="back-button" id="backFromExplore">← Back to Home</button>
+        <h2>Find Your Perfect Book</h2>
+        
+        <div class="filters">
+            <div class="filter-group">
+                <label>Genre</label>
+                <select id="genreFilter" multiple>
+                    <!-- Populated by JavaScript -->
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Author</label>
+                <select id="authorFilter" multiple>
+                    <!-- Populated by JavaScript -->
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Era</label>
+                <select id="eraFilter" multiple>
+                    <option value="modern">Modern</option>
+                    <option value="classic">Classic</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Length</label>
+                <select id="lengthFilter" multiple>
+                    <option value="short">Short (Under 300 pages)</option>
+                    <option value="medium">Medium (around 300 pages)</option>
+                    <option value="long">Long (300+ pages)</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Age Group</label>
+                <select id="ageFilter" multiple>
+                    <option value="kids">Young Reader</option>
+                    <option value="teens">Teen</option>
+                    <option value="adults">Adult</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="filter-buttons">
+            <button id="findBooks">Find Books</button>
+            <button id="resetFilters">Reset Filters</button>
+            <button id="surpriseMe">🎲 Surprise Me!</button>
+        </div>
+
+        <div id="searchSummary" class="search-summary"></div>
+        <div id="recommendationResults" class="results-grid"></div>
+    </div>
+
+    <!-- Word of the Day Section -->
+    <div class="word-section" style="display:none;">
+        <button class="back-button" id="backFromWord">← Back to Home</button>
+        <div class="word-content">
+            <h2>Word of the Day</h2>
+            <div class="word-display">
+                <div id="wordDisplay">✨</div>
+                <div id="wordMeaning" class="word-meaning">Ready to expand your vocabulary?</div>
+            </div>
+            <div class="word-buttons">
+                <button id="newWord">🔁 New Word</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

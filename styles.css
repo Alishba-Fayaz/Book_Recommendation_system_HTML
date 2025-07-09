@@ -1,0 +1,511 @@
+/* Base Styles */
+body {
+    font-family: 'Cormorant Garamond', serif;
+    margin: 0;
+    padding: 0;
+    background-color: #27023e;
+    color: #7e7e7e;
+    min-height: 100vh;
+    transition: all 0.5s ease;
+}
+
+
+/* Dark Mode */
+body.dark-mode {
+    background-color: #121212;
+    color: #f0f0f0;
+}
+
+body.dark-mode .option-card,
+body.dark-mode .book-card,
+body.dark-mode .word-content {
+    background-color: #4d4c4c;
+    color: #ffffff;
+}
+
+body.dark-mode .book-card h3 {
+    color: #f5f5f5;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(113, 110, 103, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+body.dark-mode .loading-spinner {
+    background: rgba(18, 18, 18, 0.9);
+}
+
+.spinner {
+    border: 5px solid rgba(82, 56, 138, 0.2);
+    border-top: 5px solid #52388a;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Dark Mode Toggle */
+#darkModeToggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 8px 12px;
+    background: #52388a;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    z-index: 1000;
+    font-family: 'Cormorant Garamond', serif;
+    transition: all 0.3s ease;
+}
+
+#darkModeToggle:hover {
+    transform: scale(1.05);
+}
+
+/* Homepage */
+.home-container {
+    text-align: center;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.home-container h1 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    color: #52388a;
+}
+
+.option-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.option-card {
+    width: 300px;
+    padding: 2rem;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.option-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.option-card h2 {
+    margin-top: 0;
+    font-size: 1.8rem;
+}
+
+/* Explore Section */
+.explore-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.back-button {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.back-button:hover {
+    background: rgba(178, 148, 240, 0.1);
+}
+
+.filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.filter-group select {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    background-color: white;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.filter-buttons button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#findBooks {
+    background-color: #0fb467;
+    color: white;
+}
+
+#resetFilters {
+    background-color: #39adb5;
+    color: white;
+}
+
+#surpriseMe {
+    background-color: #be1850;
+    color: white;
+}
+
+.filter-buttons button:hover {
+    transform: translateY(-2px);
+}
+
+/* Search Summary */
+.search-summary {
+    font-style: italic;
+    color: #7f8c8d;
+    margin-bottom: 1rem;
+}
+
+/* Results Grid */
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.book-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.book-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.book-cover {
+    width: 100%;
+    height: 200px;
+    background-color: #eee;
+    background-size: cover;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+}
+
+.book-card h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    font-size: 1.4rem;
+}
+
+.book-author {
+    font-style: italic;
+    color: #7f8c8d;
+    margin: 0.5rem 0;
+}
+
+.book-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.book-meta span {
+    background: #ecf0f1;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.book-desc {
+    margin: 1rem 0;
+    line-height: 1.5;
+}
+
+.rating {
+    color: #f39c12;
+    font-weight: bold;
+}
+
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 2rem;
+}
+
+/* Word of the Day Section */
+.word-section {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.word-content {
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.word-display {
+    margin: 2rem 0;
+}
+
+#wordDisplay {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #452a86;
+}
+
+.word-meaning {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.word-buttons {
+    margin-top: 2rem;
+}
+
+#newWord {
+    padding: 0.8rem 1.5rem;
+    background-color: #015086;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#newWord:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .home-container h1 {
+        font-size: 2.2rem;
+    }
+    
+    .option-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .filters {
+        grid-template-columns: 1fr;
+    }
+    
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Book Covers */
+.book-cover {
+    width: 100%;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    background-color: #f0f0f0;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    position: relative;
+}
+
+.no-cover {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 5px;
+    text-align: center;
+}
+
+/* View Book Link */
+.view-book {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: #52388a;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.view-book:hover {
+    background: #3a2762;
+    transform: translateY(-2px);
+}
+
+/* Load More Button */
+#loadMore {
+    display: block;
+    margin: 2rem auto;
+    padding: 1rem 2rem;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+#loadMore:hover {
+    background: #3e8e41;
+    transform: scale(1.05);
+}
+
+
+/* Golden Title Animation */
+.title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+    position: relative;
+}
+
+.gold-line {
+    height: 3px;
+    background: linear-gradient(90deg, #d4af37, #f9d423);
+    position: relative;
+    opacity: 0;
+    flex: 1;
+    max-width: 200px;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.7);
+}
+
+.left-line {
+    transform: translateX(-50px);
+    animation: slideInLeft 1s forwards 0.5s;
+    margin-right: 50px;
+}
+
+.right-line {
+    transform: translateX(50px);
+    animation: slideInRight 1s forwards 0.5s;
+    margin-left: 50px;
+}
+
+@keyframes slideInLeft {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.home-container h1 {
+    color: #d4af37;
+    text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+    position: relative;
+    padding: 0 20px;
+}
+
+/* Optional: Add a pulsing effect to the title */
+@keyframes pulseGold {
+    0% { text-shadow: 0 0 8px rgba(212, 175, 55, 0.4); }
+    50% { text-shadow: 0 0 15px rgba(212, 175, 55, 0.7); }
+    100% { text-shadow: 0 0 8px rgba(212, 175, 55, 0.4); }
+}
+
+.home-container h1 {
+    animation: pulseGold 3s infinite ease-in-out;
+}
+
+/* Add a decorative golden corner */
+.title-container::before,
+.title-container::after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border: 3px solid #d4af37;
+    opacity: 0;
+    animation: fadeIn 2s forwards 1s;
+}
+
+.title-container::before {
+    top: -1px;
+    left: calc(50% - 300px);
+    border-right: none;
+    border-bottom: none;
+}
+
+.title-container::after {
+    bottom: -1px;
+    right: calc(50% - 300px);
+    border-left: none;
+    border-top: none;
+}
+
+@keyframes fadeIn {
+    to { opacity: 0.7; }
+}
