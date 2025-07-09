@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     addDynamicStyles(); // Add dynamic CSS styles
 });
 
-// Fetch books from Open Library API - Optimized
+// Fetch books from Open Library API
 async function fetchBooksFromAPI(subject = "fiction", isLoadMore = false) {
     try {
         if (!isLoadMore) {
@@ -44,7 +44,6 @@ async function fetchBooksFromAPI(subject = "fiction", isLoadMore = false) {
             return;
         }
 
-        // Process books more efficiently
         const newBooks = data.works
             .filter(work => work.title && !loadedBookIDs.has(work.key))
             .map(work => {
@@ -77,7 +76,6 @@ async function fetchBooksFromAPI(subject = "fiction", isLoadMore = false) {
     }
 }
 
-// Improved helper functions
 function getRandomLength() {
     const lengths = ["short", "medium", "long"];
     return lengths[Math.floor(Math.random() * lengths.length)];
@@ -86,12 +84,10 @@ function getRandomLength() {
 function getAgeGroup(work, subject) {
     const title = work.title?.toLowerCase() || '';
     const subjects = work.subject || [];
-    
-    // Check for teen/young adult indicators
+
     const teenKeywords = ['teen', 'young adult', 'ya', 'teenager', 'high school', 'adolescent'];
     const kidsKeywords = ['children', 'juvenile', 'kids', 'picture book', 'elementary'];
     
-    // Check in title
     if (teenKeywords.some(keyword => title.includes(keyword))) {
         return "teens";
     }
@@ -100,7 +96,6 @@ function getAgeGroup(work, subject) {
         return "kids";
     }
     
-    // Check in subjects
     const subjectString = subjects.join(' ').toLowerCase();
     if (subjectString.includes('juvenile') || subjectString.includes('children')) {
         return "kids";
@@ -110,7 +105,6 @@ function getAgeGroup(work, subject) {
         return "teens";
     }
     
-    // For romance, fantasy, mystery - mix of teens and adults
     if (['romance', 'fantasy', 'mystery'].includes(subject)) {
         return Math.random() > 0.7 ? "teens" : "adults";
     }
@@ -118,26 +112,22 @@ function getAgeGroup(work, subject) {
     return "adults";
 }
 
-// Set up all event listeners
+// event listeners
 function setupEventListeners() {
     // Dark mode toggle
     document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
-    
     // Homepage options
     document.getElementById('exploreBooks').addEventListener('click', showExploreSection);
     document.getElementById('wordOfTheDay').addEventListener('click', showWordSection);
-    
     // Explore section
     document.getElementById('findBooks').addEventListener('click', findBooks);
     document.getElementById('resetFilters').addEventListener('click', resetFilters);
     document.getElementById('surpriseMe').addEventListener('click', surpriseMe);
     document.getElementById('backFromExplore').addEventListener('click', showHome);
-    
     // Word section
     document.getElementById('newWord').addEventListener('click', fetchWordOfTheDay);
     document.getElementById('backFromWord').addEventListener('click', showHome);
 }
-
 // Dark mode toggle with local storage
 function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
@@ -158,7 +148,6 @@ function updateDarkModeButton() {
         : '🌙 Dark Mode';
 }
 
-// Navigation functions
 function showHome() {
     document.querySelector('.home-container').style.display = 'block';
     document.querySelector('.explore-section').style.display = 'none';
@@ -181,12 +170,10 @@ function showWordSection() {
     }
 }
 
-// Show/hide loading spinner
 function showLoading(show) {
     document.getElementById('loading').style.display = show ? 'flex' : 'none';
 }
 
-// Populate filters
 function populateFilters() {
     const genreSelect = document.getElementById("genreFilter");
     const popularGenres = [
@@ -216,7 +203,6 @@ function updateAuthorDropdown() {
     //     authorSelect.remove(1);
     // }
     
-    // Get unique authors from loaded books
     const uniqueAuthors = [...new Set(allBooks.map(book => book.author).filter(author => author && author !== "Unknown Author"))];
     
     // Sort alphabetically and add to dropdown
@@ -228,14 +214,11 @@ function updateAuthorDropdown() {
     });
 }
 
-// Find books with API - Fixed and optimized
 async function findBooks() {
     showLoading(true);
     
     try {
         const selectedGenres = getSelectedValues('genreFilter');
-        
-        // Always fetch books based on selected genre
         if (selectedGenres.length > 0) {
             await fetchBooksFromAPI(selectedGenres[0], false);
         } else {
@@ -243,17 +226,14 @@ async function findBooks() {
             await fetchBooksFromAPI('fiction', false);
         }
         
-        // Apply all filters
         const selectedAuthors = getSelectedValues('authorFilter');
         const selectedEras = getSelectedValues('eraFilter');
         const selectedLengths = getSelectedValues('lengthFilter');
         const selectedAges = getSelectedValues('ageFilter');
 
         let results = allBooks.filter(book => {
-            // Author filter - Fixed to work with multiple selections
             const authorMatch = selectedAuthors.length === 0 || 
                                selectedAuthors.some(author => book.author.toLowerCase().includes(author.toLowerCase()));
-            
             // Era filter
             const eraMatch = selectedEras.length === 0 || selectedEras.includes(book.era);
             
@@ -266,7 +246,6 @@ async function findBooks() {
             return authorMatch && eraMatch && lengthMatch && ageMatch;
         });
 
-        // Show search summary
         updateSearchSummary(results.length, selectedGenres, selectedAuthors, selectedEras, selectedLengths, selectedAges);
         
         displayRecommendations(results);
@@ -280,7 +259,6 @@ async function findBooks() {
     }
 }
 
-// Add search summary function
 function updateSearchSummary(count, genres, authors, eras, lengths, ages) {
     const summaryDiv = document.getElementById('searchSummary');
     const filters = [];
@@ -295,13 +273,11 @@ function updateSearchSummary(count, genres, authors, eras, lengths, ages) {
     summaryDiv.innerHTML = `Found ${count} books${filterText}`;
 }
 
-// Get selected values from multi-select
 function getSelectedValues(selectId) {
     const select = document.getElementById(selectId);
     return Array.from(select.selectedOptions).map(option => option.value);
 }
 
-// Reset all filters
 function resetFilters() {
     document.querySelectorAll('select').forEach(select => {
         select.selectedIndex = -1;
@@ -316,7 +292,6 @@ function resetFilters() {
     }
 }
 
-// Surprise me with random books - Fixed
 async function surpriseMe() {
     showLoading(true);
     
@@ -350,7 +325,6 @@ function displayRecommendations(books, isLoadMore = false) {
         resultsDiv.innerHTML = '';
     }
     
-    // Remove existing load more button
     const existingLoadMore = document.getElementById('loadMore');
     if (existingLoadMore) {
         existingLoadMore.remove();
@@ -360,8 +334,6 @@ function displayRecommendations(books, isLoadMore = false) {
         resultsDiv.innerHTML = '<div class="no-results">No books found matching your criteria. Try different filters!</div>';
         return;
     }
-
-    // If this is load more, only show new books
     let booksToShow = books;
     if (isLoadMore) {
         const currentBookCount = resultsDiv.querySelectorAll('.book-card').length;
@@ -372,7 +344,6 @@ function displayRecommendations(books, isLoadMore = false) {
         const bookCard = document.createElement('div');
         bookCard.className = 'book-card animate__animated animate__fadeIn';
         
-        // Truncate long titles and descriptions
         const truncatedTitle = book.title.length > 50 ? book.title.substring(0, 50) + '...' : book.title;
         const truncatedDesc = book.description.length > 100 ? book.description.substring(0, 100) + '...' : book.description;
         
@@ -395,7 +366,6 @@ function displayRecommendations(books, isLoadMore = false) {
         resultsDiv.appendChild(bookCard);
     });
 
-    // Add load more button if we have results and there might be more
     if (books.length > 0 && allBooks.length >= booksPerPage) {
         const loadMoreBtn = document.createElement('button');
         loadMoreBtn.id = 'loadMore';
@@ -440,7 +410,7 @@ function displayRecommendations(books, isLoadMore = false) {
     }
 }
 
-// Word of the day functions - Improved error handling
+// Word of the day functions
 async function fetchWordOfTheDay() {
     const fallbackWords = [
         { word: "Serendipity", meaning: "Finding something good without looking for it" },
@@ -454,8 +424,6 @@ async function fetchWordOfTheDay() {
     try {
         document.getElementById('wordDisplay').textContent = "✨";
         document.getElementById('wordMeaning').textContent = "Consulting the lexicon...";
-
-        // Use fallback words more often to avoid API rate limits
         const useFallback = Math.random() > 0.5;
         
         if (useFallback) {
@@ -464,8 +432,6 @@ async function fetchWordOfTheDay() {
             document.getElementById('wordMeaning').textContent = fallback.meaning;
             return;
         }
-
-        // Try to get random word from API
         const randomWordResponse = await fetch("https://random-word-api.herokuapp.com/word?number=1");
         const [randomWord] = await randomWordResponse.json();
         
@@ -484,8 +450,7 @@ async function fetchWordOfTheDay() {
                 console.log("Definition fetch failed, using fallback");
             }
         }
-        
-        // Fallback to predefined words
+    
         const fallback = fallbackWords[Math.floor(Math.random() * fallbackWords.length)];
         document.getElementById('wordDisplay').textContent = fallback.word;
         document.getElementById('wordMeaning').textContent = fallback.meaning;
@@ -498,7 +463,7 @@ async function fetchWordOfTheDay() {
     }
 }
 
-// Add dynamic CSS styles for error messages and better book display
+// dynamic CSS styles for error messages and better book display
 function addDynamicStyles() {
     const additionalStyles = `
         .error-message {
